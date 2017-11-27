@@ -1,0 +1,112 @@
+// colors:
+$green: #78FF8E;
+$blue: #88EAF7;
+$sand: #FFFBED;
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background: $sand;
+}
+
+.landscape {
+    text-align: center;
+    margin: 25px auto;
+    margin-top: 150px;
+    width: 750px;
+    height: 750px;
+    border-radius: 50%;
+    background: $blue;
+    overflow: hidden;
+    
+  
+    .windmills {
+      transform: translate(-140px, 50px);
+      
+      @for $w from 1 through 3 {
+        .windmill-#{$w} {
+          position: absolute;
+          overflow: visible;
+          transform: translate($w*250px, 190px);
+            
+          .pole {
+            margin: 10px;
+            width: 10px;
+            height: 230px;
+            background-color: black;
+            border-radius: 30%;
+          }
+          
+          .bearing {
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            left: 5px;
+            z-index: 1;
+          }
+          
+          @for $n from 1 through 3 {
+            .blades-#{$n} {
+            position:absolute;
+            top: 0px;
+            left: -35.5px;
+            animation: rotation;
+            animation-duration: 5s;
+            animation-delay: $n*.25s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            
+            @for $b from 1 through 3 {
+              .blade-#{$b} {
+                width: 100px;
+                height: 10px;
+                background-color: gray;
+                border-radius: 45%;
+              }
+            }
+            
+            .blade-1 {
+              transform:translate(0px, -40px) rotate(90deg);
+            }
+            .blade-2 {
+              transform:translate(-40px, 25px) rotate(-35deg);
+            }
+            .blade-3 {
+              transform:translate(40px, 15px) rotate(35deg);
+            }
+            }
+          }
+        }
+      }
+    }
+  .hills {
+    @for $h from 1 through 3 {
+      .h-#{$h} { 
+        float: left;
+        width: 250px;
+        height: 200px;
+        background-color: $green;
+        margin: 0px;
+        margin-top: 450px;
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%;
+      }
+    }
+    
+    .ground {
+      width: 750px;
+      height: 200px;
+      background: $green;
+      overflow: hidden;
+    }
+  }
+}
+
+@keyframes rotation {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(1080deg);}
+}
+
