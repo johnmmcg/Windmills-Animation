@@ -2,22 +2,103 @@
 $green: #78FF8E;
 $blue: #88EAF7;
 $sand: #FFFBED;
+$cloud: #f2f9fe;
 
 body {
   margin: 0px;
   padding: 0px;
   background: $sand;
+  text-align: center;
 }
 
 .landscape {
-    text-align: center;
-    margin: 25px auto;
-    margin-top: 150px;
-    width: 750px;
-    height: 750px;
-    border-radius: 50%;
-    background: $blue;
-    overflow: hidden;
+  position: absolute;
+  text-align: center;
+  top:10%;
+  left: 25%;
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  background: $blue;
+  overflow: hidden;
+  border: double 15px black;
+  
+  .sky {
+    @for $c from 1 through 4 {
+      @if $c % 2 == 0 {
+        .cloud-#{$c} {
+          width: $c*30+100px; 
+          height: 70px;
+          background: $cloud;
+          border-radius: 100px;
+          position: absolute;
+          opacity: $c*.8;
+          top: $c*40;
+          left: $c*2+325px;
+          animation-name: shift;
+          animation-duration: $c*2 + 20s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
+      } @else {
+        .cloud-#{$c} {
+          width: $c*50+160px; 
+          height: 70px;
+          background: $cloud;
+          border-radius: 100px;
+          position: absolute;
+          opacity: $c*.9;
+          top: $c*40+50px;
+          left: $c*2+500px;
+          animation-name: shiftTwo;
+          animation-duration: $c*3 + 20s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
+      }
+    }
+  }
+  
+  .wind {
+    background-color: $cloud;
+    opacity: .5;
+    width: 100px;
+    height: 5px;
+    position: absolute;
+    top:300px;
+    left: 100px;
+    border-radius: 10%;
+    transform: translate(-500px,0px);
+    animation-name: windBlow;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-delay: 3s;
+    
+    &:before {
+      content:"";
+      background-color: $cloud;
+      opacity: .7;
+      width: 100px;
+      height: 5px;
+      position: absolute;
+      top:50px;
+      left: 100px;
+      border-radius: 10%;
+    }
+    
+    &:after {
+      content:"";
+      background-color: $cloud;
+      opacity: .6;
+      width: 100px;
+      height: 5px;
+      position: absolute;
+      top:100px;
+      border-radius: 10%;
+    }
+  }
+  
     
   
     .windmills {
@@ -27,7 +108,7 @@ body {
         .windmill-#{$w} {
           position: absolute;
           overflow: visible;
-          transform: translate($w*250px, 190px);
+          transform: translate($w*250px, 250px);
             
           .pole {
             margin: 10px;
@@ -55,7 +136,7 @@ body {
             left: -35.5px;
             animation: rotation;
             animation-duration: 5s;
-            animation-delay: $n*.25s;
+            animation-delay: $n*.25s+3s;
             animation-iteration-count: infinite;
             animation-timing-function: ease-in-out;
             
@@ -89,8 +170,7 @@ body {
         width: 250px;
         height: 200px;
         background-color: $green;
-        margin: 0px;
-        margin-top: 450px;
+        margin-top: 500px;
         border-top-left-radius: 50%;
         border-top-right-radius: 50%;
       }
@@ -100,7 +180,9 @@ body {
       width: 750px;
       height: 200px;
       background: $green;
+      top: 725px;
       overflow: hidden;
+      margin-top: 550px;
     }
   }
 }
@@ -108,5 +190,20 @@ body {
 @keyframes rotation {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(1080deg);}
+}
+
+@keyframes shift {
+  0% {transform: translate(-700px, 0px)}
+  100% {transform: translate(500px, 0px)}
+}
+
+@keyframes shiftTwo {
+  0% {transform: translate(-800px, 0px)}
+  100% {transform: translate(500px, 0px)}
+}
+
+@keyframes windBlow {
+  0% {transform: translate(-800px, 0px)}
+  100% {transform: translate(1600px, 0px)}
 }
 
